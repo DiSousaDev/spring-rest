@@ -12,6 +12,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
    //Page<User> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
-    @Query("SELECT u FROM User u WHERE u.name LIKE %?1%")
+    @Query("SELECT u FROM User u WHERE trim(u.name) LIKE %?1%")
     Page<User> findByName(String name, Pageable pageable);
 }

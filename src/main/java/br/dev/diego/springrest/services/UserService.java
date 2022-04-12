@@ -15,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.data.mapping.Alias.ofNullable;
-
 @Service
 public class UserService {
 
@@ -51,9 +49,6 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Page<UserDto> findByName(String name, Pageable pageable) {
-        if(ofNullable(name).isPresent()) {
-            return repository.findByName(name, pageable).map(user -> userMapper.userToUserDto(user));
-        }
-        throw new ResourceNotFoundException("Nenhum usuário encontrado.");
+        return repository.findByName(name.trim(), pageable).map(user -> userMapper.userToUserDto(user));
     }
 }

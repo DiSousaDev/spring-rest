@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping(value = "find-by-name")
-    public ResponseEntity<Page<UserDto>> findByName(@RequestParam(required = false) String name, Pageable pageable) {
+    public ResponseEntity<Page<UserDto>> findByName(@RequestParam String name, Pageable pageable) {
         return ResponseEntity.ok().body(userService.findByName(name, pageable));
     }
 
